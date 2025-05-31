@@ -1,7 +1,9 @@
 package com.yatzy;
 import org.junit.jupiter.api.Test;
 
+import com.yatzy.model.Category;
 import com.yatzy.model.Dice;
+import com.yatzy.model.DiceRoller;
 import com.yatzy.rule.ChanceRule;
 import com.yatzy.rule.FivesRule;
 import com.yatzy.rule.FourOfAKindRule;
@@ -18,11 +20,14 @@ import com.yatzy.rule.TwoPairRule;
 import com.yatzy.rule.TwosRule;
 import com.yatzy.rule.YatzyRule;
 
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.Arrays;
 import java.util.Map;
 
 
@@ -188,6 +193,52 @@ public class YatzyJavaTest {
     	    // The internal state of Dice should remain unchanged
     	    int[] actual = dice.getValues();
     	    assertArrayEquals(new int[]{1, 2, 3, 4, 5}, actual);
+    }
+    
+    @Test
+    void roll_returns_five_dice_test() {
+        DiceRoller roller = new DiceRoller();
+        int[] dice = roller.roll();
+        assertEquals(5, dice.length, "Dice roll should return exactly 5 values");
+    }
+
+    @Test
+    void roll_dice_values_in_range_test() {
+        DiceRoller roller = new DiceRoller();
+        int[] dice = roller.roll();
+        for (int die : dice) {
+            assertTrue(die >= 1 && die <= 6, "Each die should be between 1 and 6");
+        }
+    }
+
+    @Test
+    void roll_randomness_test() {
+        DiceRoller roller = new DiceRoller();
+        int[] firstRoll = roller.roll();
+        int[] secondRoll = roller.roll();
+        assertNotEquals(Arrays.toString(firstRoll), Arrays.toString(secondRoll),
+                "Two rolls should not produce the same result (most of the time)");
+    }
+    
+    @Test
+    void all_categories_exist_test() {
+        Category[] categories = Category.values();
+        assertTrue(categories.length > 0, "Category enum should not be empty");
+    }
+
+    @Test
+    void category_names_test() {
+        assertEquals("YATZY", Category.YATZY.name());
+        assertEquals("THREE_OF_A_KIND", Category.THREE_OF_A_KIND.name());
+        assertEquals("SMALL_STRAIGHT", Category.SMALL_STRAIGHT.name());
+        assertEquals("LARGE_STRAIGHT", Category.LARGE_STRAIGHT.name());
+        assertEquals("ONES", Category.ONES.name());
+    }
+
+    @Test
+    void category_ValueOf_test() {
+        assertEquals(Category.YATZY, Category.valueOf("YATZY"));
+        assertThrows(IllegalArgumentException.class, () -> Category.valueOf("INVALID"));
     }
     
     private Dice createDice(int... values) {
