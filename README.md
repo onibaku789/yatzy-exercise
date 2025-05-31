@@ -88,4 +88,20 @@ The codebase contains a Java and a Kotlin implementation. Choose one to refactor
       - Replace duplicate logic with reusable components
     - **Design Pattern Used**
       - Strategy	Each rule is a strategy implementing the Rule interface.
-      - Template Method (via inheritance)	Similar behavior across number-specific rules (e.g., NumberRule as base class). 
+      - Template Method (via inheritance)	Similar behavior across number-specific rules (e.g., NumberRule as base class).
+     
+    - **Console Output**
+```1 Roll
+You have choosen Category: YATZY
+score = 50
+You've got a YATZY
+2 Roll
+You have choosen Category: THREE_OF_A_KIND
+score = 12
+You've got a THREE_OF_A_KIND
+3 Roll
+You have choosen Category: ONES
+score = 5
+You've got a ONES```
+
+
