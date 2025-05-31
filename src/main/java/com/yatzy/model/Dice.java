@@ -1,3 +1,4 @@
+package com.yatzy.model;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Map;
@@ -34,7 +35,7 @@ public class Dice {
 	 * get unmodifiable frequencyMap which help us for further computation
 	 * 
 	 */
-	public Map<Integer, Long> geFrequencyMap() {
+	public Map<Integer, Long> getFrequencyMap() {
 		return Collections.unmodifiableMap(frequencyMap);
 	}
 	
