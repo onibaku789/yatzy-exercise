@@ -72,3 +72,38 @@ The codebase contains a Java and a Kotlin implementation. Choose one to refactor
         - Ensure all tests pass before submission.
     - **Design Patterns**
         - Consider applying relevant design patterns to improve code structure and efficiency.
+     
+- **Code Refactoring Detailed Overview**
+    - **Exisiting System Issue**
+      - Single Main class (YatzyJava) Contained all logic for scoring, violating SRP (Single Responsibility Principle).
+      - No OOP abstraction	All logic was procedural, making extension and testing harder.
+      - Duplicate code	Similar logic was used for scoring rules like ones, twos, threes, etc.
+      - Hard to test and maintain	Each scoring rule was tied directly to method calls without isolation.
+      - No use of design patterns	No encapsulation of behavior or adherence to OOP principles.
+    - **Refactoring Changes Done**
+      - Follow SOLID principles
+      - Use OOP abstractions to represent game rules
+      - Improve testability, maintainability, and extensibility
+      - Apply suitable design patterns for shared logic
+      - Replace duplicate logic with reusable components
+    - **Design Pattern Used**
+      - Strategy	Each rule is a strategy implementing the Rule interface.
+      - Template Method (via inheritance)	Similar behavior across number-specific rules (e.g., NumberRule as base class).
+     
+    - **Console Output**
+```
+1 Roll
+You have choosen Category: YATZY
+score = 50
+You've got a YATZY
+2 Roll
+You have choosen Category: THREE_OF_A_KIND
+score = 12
+You've got a THREE_OF_A_KIND
+3 Roll
+You have choosen Category: ONES
+score = 5
+You've got a ONES
+```
+
+
